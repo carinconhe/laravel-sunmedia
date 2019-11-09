@@ -1,0 +1,29 @@
+.css-flex-table-header,
+.css-flex-table-body {
+    display: flex;
+    flex: 0 0 100%;
+}
+
+.css-flex-table,
+.css-flex-table-body {
+    flex-wrap: wrap;
+}
+
+.css-flex-table-header div {
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(191, 191, 191);
+}
+
+.css-flex-table-header div,
+.css-flex-table-body div {
+    flex: 0 1 100px;
+    padding: 0 6px;
+    border: 1px solid rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+
+.css-flex-table-body div {
+    text-align: center;
+}
