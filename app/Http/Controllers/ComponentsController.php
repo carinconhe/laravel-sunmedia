@@ -3,17 +3,25 @@
 namespace Sunmedia\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sunmedia\Models\Component;
 
 class ComponentsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $components = Component::with('typeComponents')->get();
+        $data = [
+            'title'=>'Components',
+            'components' => $components
+        ];
+        return view('component')->with($data);
     }
 
     /**
@@ -80,5 +88,12 @@ class ComponentsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checked($id){
+        $type = Component::find($id);
+        $type->status = !$type->status;
+        $type->update();
+        return redirect('/dashboard/components');
     }
 }
