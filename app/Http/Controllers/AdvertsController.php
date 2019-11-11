@@ -19,7 +19,7 @@ class AdvertsController extends Controller
             'title'=>'Adverts',
             'adverts' => $adverts
         ];
-        return view('adverts')->with($data);
+        return view('advert.index')->with($data);
     }
 
     /**

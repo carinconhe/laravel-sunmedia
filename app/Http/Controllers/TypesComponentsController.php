@@ -18,7 +18,7 @@ class TypesComponentsController extends Controller
             'title'=>'Types of components',
             'typesComponents' => $typesComponents
         ];
-        return view('type')->with($data);
+        return view('type.index')->with($data);
     }
 
     /**

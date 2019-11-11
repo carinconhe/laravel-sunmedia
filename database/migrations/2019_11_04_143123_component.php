@@ -15,7 +15,9 @@ class Component extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //imagen or video
+            //video
+            $table->string('video');
+            //imagen
             $table->string('url');
             $table->string('image');
             $table->string('format');

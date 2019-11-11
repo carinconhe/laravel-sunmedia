@@ -9,6 +9,7 @@
                     {{$title}}
                     <nav class="navbar navbar-default">
                         <div class="container-fluid">
+                            <div class="navbar-header"></div>
                             <div class="navbar-header float-right">
                                 <a class="btn btn-primary btn-sm" href="/home">Back</a>
                             </div>
