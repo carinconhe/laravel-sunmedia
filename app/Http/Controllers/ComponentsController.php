@@ -45,35 +45,50 @@ class ComponentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        $messages   = [];
+        $messages   = [
+            
+        ];
         $rules      = [
-            'name'      => 'required',
-            'type'      => 'required',
-            'width'     => 'required|integer',
-            'height'    => 'required|integer',
-            'status'    => 'required',
-            'location_x' => 'required',
-            'location_y' => 'required',
-            'location_z' => 'required'
+            'name'                  => 'required',
+            'type_components_id'    => 'required',
+            'width'                 => 'required|integer',
+            'height'                => 'required|integer',
+            'status'                => 'required',
+            'location_x'            => 'required',
+            'location_y'            => 'required',
+            'location_z'            => 'required'
         ];
         
 
-        if($request->type == 2){
+        if($request->type_components_id == 2){
+            $rules['video']     = 'required|mimetypes:video/mp4,video/webm';
             $rules['url']       = 'required|url';
+            $rules['size']      = 'required|integer';
             $rules['format']    = 'required';
-        }else if($request->type == 1){
-            $rules['text']      = 'required';
-        }else if($request->type == 3){
-            $rules['image']     = 'required|image|mimes:jpg,png';
+        }else if($request->type_components_id == 1){
+            $rules['text']      = 'required|string|max:140';
+        }else if($request->type_components_id == 3){
+            $rules['image']     = 'required|image|mimes:jpeg,png';
+            $rules['url']       = 'required|url';
+            $rules['size']      = 'required|integer';
+            $rules['format']    = 'required';
+            //dd($request->image);
         }
-
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()){
             return Redirect::back()->withErrors($validator)->withInput();
         }
-   
-        //Product::create($request->all());
+        if($request->type_components_id == 2){
+            //$fileName = sha1(date('YmdHis') . str_random(10)).'.'.$request->video->getClientOriginalExtension();
+            //$request->video->storeAs('components',$fileName);
+            $file   = $request->file('video');
+            $video  = $file->store('components', ['disk' => 'public']);
+        }
+        $component = Component::create($request->all());
+        $component->video = $video;
+        $component->update();
+        return Redirect::to('dashboard/components')->with('success','Greate! Component created successfully.');
     }
 
     /**
@@ -126,5 +141,10 @@ class ComponentsController extends Controller
         $type->status = !$type->status;
         $type->update();
         return redirect('/dashboard/components');
+    }
+
+    public function json($id){
+        $component = Component::find($id)->toArray();
+        return response()->json($component);
     }
 }

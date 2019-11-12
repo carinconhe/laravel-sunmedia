@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div class="card">
                 <div class="card-header">
                     {{$title}}
@@ -39,6 +39,7 @@
                             <div>height</div>
                             <div>location</div>
                             <div>Status</div>
+                            <div>JSON</div>
                         </div>
 
                         
@@ -71,6 +72,7 @@
                                             @endif
                                         </a>
                                     </div>
+                                    <div><a target="_blank" href="/dashboard/components/json/{{ $component->id}}">JSON</a></div>
                                 </div>
                             @endforeach
                         

@@ -25,7 +25,7 @@
                     </div>
                     @endif
 
-                    {!! Form::open(['route' => 'component.store','method' => 'POST']) !!}
+                    {!! Form::open(['route' => 'component.store','method' => 'POST','files' => true]) !!}
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-12">
@@ -38,15 +38,15 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <strong>component's types</strong>
-                                {!! Form::select('type',$types,'',['class' => 'form-control mb-4','id' =>'type']) !!}
-                                @if ($errors->has('type'))<span class="text-danger">{{ $errors->first('type') }}</span>@endif
+                                {!! Form::select('type_components_id',$types,'',['class' => 'form-control mb-4','id' =>'type_components_id']) !!}
+                                @if ($errors->has('type_components_id'))<span class="text-danger">{{ $errors->first('type_components_id') }}</span>@endif
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <strong>Url</strong>
-                                {!! Form::text('url','',array('id'=>'url','class'=>'form-control','placeholder'=>'Enter Url')) !!}
-                                @if ($errors->has('url'))<span class="text-danger">{{ $errors->first('url') }}</span>@endif
+                                <strong>Video</strong>
+                                {!! Form::file('video') !!}
+                                @if ($errors->has('video'))<span class="text-danger">{{ $errors->first('video') }}</span>@endif
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -54,6 +54,13 @@
                                 <strong>Image</strong>
                                 {!! Form::file('image') !!}
                                 @if ($errors->has('image'))<span class="text-danger">{{ $errors->first('image') }}</span>@endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <strong>Url</strong>
+                                {!! Form::text('url','',array('id'=>'url','class'=>'form-control','placeholder'=>'Enter Url')) !!}
+                                @if ($errors->has('url'))<span class="text-danger">{{ $errors->first('url') }}</span>@endif
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -73,7 +80,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <strong>Text</strong>
-                                {!! Form::text('text','',array('id'=>'text','class'=>'form-control','placeholder'=>'Enter Text')) !!}
+                                {!! Form::textarea('text','',array('id'=>'text','class'=>'form-control','rows' => 3, 'cols' =>10,'placeholder'=>'Enter Text')) !!}
                                 @if ($errors->has('text'))<span class="text-danger">{{ $errors->first('text') }}</span>@endif
                             </div>
                         </div>

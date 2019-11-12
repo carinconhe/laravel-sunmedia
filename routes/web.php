@@ -26,6 +26,7 @@ Route::group(['prefix' => 'dashboard'], function() {
     Route::get('/components/new', 'ComponentsController@create');
     Route::post('/components/store', 'ComponentsController@store')->name('component.store');
     Route::get('/components/checked/{id}', 'ComponentsController@checked');
+    Route::get('/components/json/{id}', 'ComponentsController@json');
     
     Route::get('/types-of-components', 'TypesComponentsController@index')->name('types-of-components');
     Route::get('/types-of-components/checked/{id}', 'TypesComponentsController@checked');

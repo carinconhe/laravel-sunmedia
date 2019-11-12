@@ -16,14 +16,14 @@ class Component extends Migration
         Schema::create('components', function (Blueprint $table) {
             $table->bigIncrements('id');
             //video
-            $table->string('video');
+            $table->string('video')->nullable();
             //imagen
-            $table->string('url');
-            $table->string('image');
-            $table->string('format');
-            $table->string('size');
+            $table->string('image')->nullable();
+            $table->string('url')->nullable();
+            $table->string('format')->nullable();
+            $table->string('size')->nullable();
             //text
-            $table->string('text');
+            $table->string('text')->nullable();
             //shared
             $table->string('name');
             $table->string('width');
