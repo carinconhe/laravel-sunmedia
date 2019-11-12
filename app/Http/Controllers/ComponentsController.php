@@ -79,14 +79,20 @@ class ComponentsController extends Controller
         if ($validator->fails()){
             return Redirect::back()->withErrors($validator)->withInput();
         }
+        $component = Component::create($request->all());
+
         if($request->type_components_id == 2){
-            //$fileName = sha1(date('YmdHis') . str_random(10)).'.'.$request->video->getClientOriginalExtension();
-            //$request->video->storeAs('components',$fileName);
             $file   = $request->file('video');
             $video  = $file->store('components', ['disk' => 'public']);
+            $component->video = $video;
         }
-        $component = Component::create($request->all());
-        $component->video = $video;
+
+        if($request->type_components_id == 3){
+            $file   = $request->file('image');
+            $image  = $file->store('components', ['disk' => 'public']);
+            $component->image = $image;
+        }
+        
         $component->update();
         return Redirect::to('dashboard/components')->with('success','Greate! Component created successfully.');
     }
